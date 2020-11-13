@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ride</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <ion-card *ngIf="ride" color="light">
+    <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
+    <ion-card-header>
+      <ion-card-subtitle>Destino</ion-card-subtitle>
+      <ion-card-title>{{ride.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Rodamos el <b>{{ride.start | date}}</b></p>
+
+      <ion-item routerLink="/ride-form/{{ride.id}}">
+        <ion-icon name="create" slot="start"></ion-icon>
+        <ion-label>Editar</ion-label>
+      </ion-item>
+      <ion-item (click)="delete(ride.id)" color="danger">
+        <ion-icon name="trash" slot="start"></ion-icon>
+        <ion-label>Eliminar</ion-label>
+      </ion-item>
+
+      <ion-list *ngIf="ride?.wayPoints">
+        <ion-item color="dark" *ngFor="let leg of ride.wayPoints">
+          <ion-label class="ion-text-wrap">
+            <b>{{leg.start_address}} => {{leg.end_address}}</b>
+            <p>{{leg.distance.text}} | {{leg.duration.text}}</p>
+            <p *ngIf="leg?.weather">Actual <b>{{leg.weather.temp}}ºC</b> | Min <b>{{leg.weather.temp_min}}ºC</b> | Max <b>{{leg.weather.temp_max}}ºC</b></p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

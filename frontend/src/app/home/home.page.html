@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <div id="logo-container">
+    <img src="/assets/platziride_logo.png" />
+  </div>
+  <ion-list>
+    <ion-item color="dark">
+      <ion-label>Email</ion-label>
+      <ion-input [(ngModel)]="credential.email" type="email"></ion-input>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Password</ion-label>
+      <ion-input [(ngModel)]="credential.password" type="password"></ion-input>
+    </ion-item>
+    <ion-item color="dark" *ngIf="!isLoggingIn">
+      <ion-label>Confirmar Password</ion-label>
+      <ion-input [(ngModel)]="credential.passwordConfirm" type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-button class="ion-activatable" expand="block" (click)="login()">
+      Ingresar
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-button>
+    <p *ngIf="!isLoggingIn">
+      Ya tienes una cuenta? <a (click)="toggleLogin()">Click Aquí</a>
+    </p>
+    <p *ngIf="isLoggingIn">
+      Aun no tienes cuenta? <a (click)="toggleLogin()">Click Aquí</a>
+    </p>
+  </div>
+</ion-content>
